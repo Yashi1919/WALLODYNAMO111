@@ -77,15 +77,32 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
+    splits {
+        abi {
+            enable true
+            reset()
+            include 'armeabi-v7a', 'x86', 'x86_64', 'arm64-v8a'
+        }
+    }
+
     namespace "com.wallodynamo"
     defaultConfig {
         applicationId "com.wallodynamo"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 1
-        versionName "1.0"
+        versionCode 7
+        versionName "1.7"
+        vectorDrawables.useSupportLibrary = true
     }
+    
     signingConfigs {
+        release {
+            keyAlias 'release-key'                    // Alias you used while creating the keystore
+            keyPassword '1234567890'           // The password you entered for the key
+            storeFile file('C:/hella/ukjgukaawg/wallodynamo/release-key.keystore')  // Update this to point to the actual location of your keystore
+            storePassword '1234567890'    // The password you entered for the keystore
+        }
+
         debug {
             storeFile file('debug.keystore')
             storePassword 'android'
@@ -100,16 +117,23 @@ android {
         release {
             // Caution! In production, you need to generate your own keystore file.
             // see https://reactnative.dev/docs/signed-apk-android.
-            signingConfig signingConfigs.debug
-            minifyEnabled enableProguardInReleaseBuilds
+            signingConfig signingConfigs.release
+            //minifyEnabled enableProguardInReleaseBuilds
+            minifyEnabled true
+            shrinkResources false
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
         }
     }
+apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 }
 
 dependencies {
     // The version of react-native is set by the React Native Gradle Plugin
     implementation("com.facebook.react:react-android")
+     implementation("com.facebook.react:react-native:+")  // Ensure this line exists
+
+    // Add WorkManager dependency
+    implementation "androidx.work:work-runtime-ktx:2.7.1"
 
     if (hermesEnabled.toBoolean()) {
         implementation("com.facebook.react:hermes-android")
@@ -117,3 +141,8 @@ dependencies {
         implementation jscFlavor
     }
 }
+
+project.ext.vectoricons = [
+    iconFontNames: [ 'MaterialIcons.ttf' ] // Add other fonts if you are using them
+]
+

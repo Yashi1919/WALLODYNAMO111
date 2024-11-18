@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "121970037048",
+    "project_id": "wallodynamo",
+    "storage_bucket": "wallodynamo.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:121970037048:android:63aa512e32198212f9b1cd",
+        "android_client_info": {
+          "package_name": "com.wallodynamo"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBRiH9C14ESRo1uewWlr6qLvt0EV1BhqqQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -9,8 +9,10 @@ import com.facebook.react.ReactPackage
 import com.facebook.react.defaults.DefaultNewArchitectureEntryPoint.load
 import com.facebook.react.defaults.DefaultReactHost.getDefaultReactHost
 import com.facebook.react.defaults.DefaultReactNativeHost
+import com.wallodynamo.AlarmPackage
+import com.wallodynamo.IntervalPackage
 import com.facebook.soloader.SoLoader
-
+import com.wallodynamo.AlarmPermissionPackage
 class MainApplication : Application(), ReactApplication {
 
   override val reactNativeHost: ReactNativeHost =
@@ -19,6 +21,9 @@ class MainApplication : Application(), ReactApplication {
             PackageList(this).packages.apply {
               // Packages that cannot be autolinked yet can be added manually here, for example:
               // add(MyReactNativePackage())
+              add(AlarmPackage())
+              add(IntervalPackage())
+              add(AlarmPermissionPackage())
             }
 
         override fun getJSMainModuleName(): String = "index"
